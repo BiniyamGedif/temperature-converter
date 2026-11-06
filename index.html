@@ -5,9 +5,79 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Temperature Converter</title>
   <link rel="stylesheet" href="css/style.css" />
+
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = saved || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
 </head>
 <body>
-  <!-- Application markup will be added in Phase 2 -->
+  <main class="page">
+    <section class="converter" aria-labelledby="converter-title">
+      <header class="converter__header">
+        <div>
+          <h1 id="converter-title">Temperature Converter</h1>
+          <p class="subtitle">Convert between Celsius, Fahrenheit, and Kelvin</p>
+        </div>
+        <button id="theme-toggle" class="icon-button" type="button" aria-label="Toggle light and dark theme">
+          <svg class="icon icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+          </svg>
+          <svg class="icon icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+          </svg>
+        </button>
+      </header>
+
+      <div class="field">
+        <label for="temperature">Temperature value</label>
+        <input id="temperature" type="number" step="any" inputmode="decimal" placeholder="Enter a temperature" autofocus />
+      </div>
+
+      <div class="units">
+        <div class="field">
+          <label for="from-unit">Convert from</label>
+          <select id="from-unit">
+            <option value="celsius">Celsius (°C)</option>
+            <option value="fahrenheit">Fahrenheit (°F)</option>
+            <option value="kelvin">Kelvin (K)</option>
+          </select>
+        </div>
+
+        <button id="swap" class="swap-button" type="button" aria-label="Swap source and destination units">⇄</button>
+
+        <div class="field">
+          <label for="to-unit">Convert to</label>
+          <select id="to-unit">
+            <option value="celsius">Celsius (°C)</option>
+            <option value="fahrenheit" selected>Fahrenheit (°F)</option>
+            <option value="kelvin">Kelvin (K)</option>
+          </select>
+        </div>
+      </div>
+
+      <p id="message" class="message" role="status" aria-live="polite"></p>
+
+      <div class="result-box">
+        <span class="result-label">Result</span>
+        <output id="result" class="result-value" for="temperature from-unit to-unit">—</output>
+      </div>
+
+      <div class="actions">
+        <button id="clear" class="btn btn--secondary" type="button">Clear</button>
+      </div>
+    </section>
+  </main>
+
   <script src="js/script.js"></script>
 </body>
 </html>

@@ -337,3 +337,12 @@ body {
     animation-duration: 0.01ms !important;
   }
 }
+
+/* ---------- Swap spin animation ---------- */
+.swap-button.is-spinning {
+  animation: swap-spin 0.3s ease;
+}
+
+@keyframes swap-spin {
+  to { transform: rotate(360deg); }
+}
